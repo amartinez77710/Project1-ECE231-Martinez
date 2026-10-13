@@ -2,10 +2,10 @@
 #include <cmath>
 #include "capacitor.h"
 
-//Equation for constant Voltage
-//Voltage across capacitor will change due to V0 = Vo + Vc
+//Function for constant Voltage
+/*Voltage across capacitor will change due to V0 = Vr + Vc. Used to find current and voltage across the capacitor as time progresses. Voltage is not constant across the capacitor because it is in series with the battery.*/
 void currentthroughCapacitor(Capacitor *capacitorData, double timeStep, double constvoltage, double resistance){
-	
+//Main Equation 
 	//Vc = Vo - Vc
 	//We will find current, but need to update voltage across capacitor
 	// Vc = 10 - current * resistance
@@ -19,8 +19,10 @@ void currentthroughCapacitor(Capacitor *capacitorData, double timeStep, double c
 	}
 }
 	
-
+//Function for constant Current
+/*Used to find current through the capacitor as time progresses. Current will be constant across the capacitor because it is in series with the current source */
 void voltageacrossCapacitor(Capacitor *capacitorData, double timeStep, double constcurrent){
+//Equation Used: V(t-1) = V(t) + I(t)deltaT * 1/C
 	for(int i = 1; i <= 50000; i++){
 		capacitorData->time[i] = capacitorData->time[i - 1] + timeStep;
 		capacitorData->current[i] = constcurrent;
@@ -101,10 +103,6 @@ int main(){
 	//FREEING MEMORY
 	freeCapacitor(ccCapacitor);
 	freeCapacitor(vcCapacitor);
-	
-	
-	
-	
 	
 	//Thank you. Made by Adrian Martinez	
 	
